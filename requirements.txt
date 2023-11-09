@@ -1,0 +1,10 @@
+jupyter_client=8.6.0
+jupyter_core=5.5.0
+matplotlib=3.8.0
+numpy=1.26.0
+pandas=2.1.1
+pillow=10.0.1
+pytorch=2.0.1
+torchvision=0.15.2
+
+
