@@ -11,7 +11,9 @@
 # Ignore a specific file extension in all directories
 #**/*.bak
 
-
+back/
 dataset_chat/
+dataset_preprocessing_errors/
 data/
+test/
 helloworld.py
