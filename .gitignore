@@ -13,5 +13,7 @@
 
 
 dataset_chat/
+selected_dataset_chat/
 data/
 helloworld.py
+__pycache__/
