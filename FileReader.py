@@ -4,8 +4,7 @@ import glob
 
 from ImageProcessing import preprocess_image
 
-def get_picture_tensors(n_classes, required_train_imgs, required_test_imgs, use_validation = True):
-    root_directory = "dataset_chat/" 
+def get_picture_tensors(root_directory, n_classes, required_train_imgs, required_test_imgs, use_validation = True):
     subdirectories = [d for d in os.listdir(root_directory) if os.path.isdir(os.path.join(root_directory, d))]
 
     # créer des listes vides
