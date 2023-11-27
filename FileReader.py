@@ -4,8 +4,7 @@ import glob
 
 from ImageProcessing import preprocess_image
 
-def get_picture_tensors(n_classes, required_train_imgs, required_test_imgs, use_validation = True):
-    root_directory = "dataset_chat/" 
+def get_picture_tensors(root_directory, n_classes, required_train_imgs, required_test_imgs, use_validation = True, show_progress = True):
     subdirectories = [d for d in os.listdir(root_directory) if os.path.isdir(os.path.join(root_directory, d))]
 
     # créer des listes vides
@@ -25,9 +24,11 @@ def get_picture_tensors(n_classes, required_train_imgs, required_test_imgs, use_
         jpeg_files = glob.glob(os.path.join(subdirectory_path, "*.jpg"))
             
         if len(jpeg_files) < required_images_per_cat:
-            print(f"{subdirectory_path} does not contain enough images, will not be used")
+            if show_progress:
+                print(f"{subdirectory_path} does not contain enough images, will not be used")
         else:
-            print('Chargement de ' + subdirectory_path + '  ->  ' + str(required_images_per_cat) + '/' + str(len(jpeg_files)) + ' images')
+            if show_progress:
+                print('Chargement de ' + subdirectory_path + '  ->  ' + str(required_images_per_cat) + '/' + str(len(jpeg_files)) + ' images')
             
             # créer des one-hots pour labels
             label = torch.zeros(n_classes)
@@ -50,10 +51,12 @@ def get_picture_tensors(n_classes, required_train_imgs, required_test_imgs, use_
             
 
     if current_amount_of_classes < n_classes:
-        print(f"Could not find {n_classes} valid classes in dataset, only {current_amount_of_classes} classes will be used")
+        if show_progress:
+            print(f"Could not find {n_classes} valid classes in dataset, only {current_amount_of_classes} classes will be used")
         n_classes = current_amount_of_classes
 
-    print('Done!')
+    if show_progress:
+        print('Done!')
     
 
     return train_images, val_images, test_images, train_labels, val_labels, test_labels
