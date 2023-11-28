@@ -14,7 +14,8 @@
 __pycache__/
 back/
 dataset_chat/
-dataset_chat_downscale/
+# dataset_chat_downscale/
+dataset_chat_downscale - Copy/
 dataset_chat_downscale_no_background/
 dataset_preprocessing_errors/
 data/
