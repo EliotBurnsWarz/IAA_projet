@@ -333,9 +333,9 @@ def show_images_as_grid(list_of_imgs, image_per_line = 3):
 
 if __name__ == '__main__':
 
-    root_directory = 'myOwnDataset'
-    directory_for_background = 'myOwnDataset_downscale'
-    directory_for_no_background = 'myOwnDataset_downscale_no_background'
+    root_directory = 'dataset_chat_eliot'
+    directory_for_background = 'dataset_chat_eliot_downscale'
+    directory_for_no_background = 'dataset_chat_eliot_downscale_no_background'
 
     subdirectories = [d for d in os.listdir(root_directory) if os.path.isdir(os.path.join(root_directory, d))]
     subdirectories = subdirectories[1:]  # on skip ceux qui sont déjà fait

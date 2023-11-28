@@ -25,3 +25,4 @@ test/
 dataset_chat_downscale.zip
 dataset_chat_downscale_no_background.zip
 helloworld.py
+*.jpg
