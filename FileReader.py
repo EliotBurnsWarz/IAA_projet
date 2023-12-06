@@ -9,7 +9,8 @@ def get_picture_tensors(root_directory,
                         required_train_imgs, 
                         required_test_imgs, 
                         use_validation = True,
-                        use_selected_eval_datasets = False):
+                        use_selected_eval_datasets = False,
+                        show_progress = True):
     
     subdirectories = [d for d in os.listdir(root_directory) if os.path.isdir(os.path.join(root_directory, d))]
 
@@ -30,15 +31,17 @@ def get_picture_tensors(root_directory,
         jpeg_files = glob.glob(os.path.join(subdirectory_path, "*.jpg"))
             
         if len(jpeg_files) < required_images_per_cat:
-            print(f"{subdirectory_path} does not contain enough images, will not be used")
+            if show_progress:
+                print(f"{subdirectory_path} does not contain enough images, will not be used")
         else:
+            if show_progress:
+                print('Chargement de ' + subdirectory_path + '  ->  ' + str(required_images_per_cat) + '/' + str(len(jpeg_files)) + ' images')
             
             # créer des one-hots pour labels
             label = torch.zeros(n_classes)
             label[current_amount_of_classes] = 1
-                
-            print('Chargement de ' + subdirectory_path + '  ->  ' + str(required_images_per_cat) + '/' + str(len(jpeg_files)) + ' images')
-            
+
+
             if use_selected_eval_datasets:
                 if os.path.exists(os.path.join(subdirectory_path, "T.jpg")) and os.path.exists(os.path.join(subdirectory_path, "V.jpg")) :
                     val_path = jpeg_files[0][:35] + "\\T.JPG"
@@ -88,7 +91,8 @@ def get_picture_tensors(root_directory,
     else:
         n_classes_to_use = n_classes
 
-    print('Done!')
+    if show_progress:
+        print('Done!')
     
 
     return train_images, val_images, test_images, train_labels, val_labels, test_labels, n_classes_to_use

@@ -11,10 +11,20 @@
 # Ignore a specific file extension in all directories
 #**/*.bak
 
+__pycache__/
 back/
 dataset_chat/
 selected_dataset_chat/
+dataset_chat_downscale/
+dataset_chat_downscale_no_background/
+dataset_chat_eliot/
+dataset_chat_eliot_downscale/
+dataset_chat_eliot_downscale_no_background/
+dataset_preprocessing_errors/
 data/
+myOwnDataset/
+myOwnDataset_downscale/
+myOwnDataset_downscale_no_background/
 test/
 
 
@@ -24,3 +34,6 @@ dataset_chat_downscale_no_background/*
 helloworld.py
 __pycache__/
 
+dataset_chat_downscale.zip
+dataset_chat_downscale_no_background.zip
+helloworld.py

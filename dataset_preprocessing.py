@@ -288,19 +288,29 @@ def show_images_as_grid(list_of_imgs, image_per_line = 3):
     nrows = 1 + (N - 1) // image_per_line
 
     if nrows == 1:
-        ncols = len(list_of_imgs)
+        ncols = N
 
     fig, axs = plt.subplots(nrows = nrows, ncols = ncols, figsize = (ncols*2.1, nrows*2.1))
     plt.subplots_adjust(wspace=0, hspace=0)
 
+    if N ==  1:  # Gère le cas une image
+        axs = [axs]
+    
     for axs_row in axs:
+        if nrows == 1:  # Gère le cas une ligne
+            axs_row = [axs_row]
+
         for ax in axs_row:
             ax.set(xticklabels=[], yticklabels=[], xticks=[], yticks=[])
             ax.set_aspect('equal')
 
     for i, img in enumerate(list_of_imgs):
         row, col = divmod(i, ncols)
-        ax = axs[row, col]
+
+        if nrows == 1:
+            ax = axs[col]
+        else:
+            ax = axs[row, col]
 
         img = img.detach()
         img = F.to_pil_image(img)
@@ -318,9 +328,18 @@ def show_images_as_grid(list_of_imgs, image_per_line = 3):
 
 if __name__ == '__main__':
 
-    root_directory = "selected_datasets/selected_dataset_chat"
+    root_directory = 'dataset_chat_eliot'
+    directory_for_background = 'dataset_chat_eliot_downscale'
+    directory_for_no_background = 'dataset_chat_eliot_downscale_no_background'
 
     subdirectories = [d for d in os.listdir(root_directory) if os.path.isdir(os.path.join(root_directory, d))]
+    subdirectories = subdirectories[1:]  # on skip ceux qui sont déjà fait
+    # subdirectories = [subdirectories[0]]
+
+    # print(len(subdirectories))
+    # print(subdirectories[0])
+
+    # subdirectories = ['0036']
 
     for subdirectory in subdirectories:
         subdirectory_path = os.path.join(root_directory, subdirectory)
@@ -330,8 +349,8 @@ if __name__ == '__main__':
         print(str(len(jpg_files)) + ' files in the subdirectory ' + subdirectory)
         for jpg_file in jpg_files:
             preprocess_original_image(jpg_file, 
-                directory_for_background = "selected_datasets/prep_bounding_box/", 
-                directory_for_no_background =  "selected_datasets/prep_no_back/")
+                directory_for_background = directory_for_background, 
+                directory_for_no_background = directory_for_no_background)
 
         print('Done!')
 
