@@ -37,7 +37,10 @@ def preprocess_original_image(original_filepath, directory_for_background, direc
     start_time = time.time()
 
     # original_directory, subdirectory, filename = original_filepath.split('/')
-    original_directory, subdirectory, filename = os.path.normpath(original_filepath).split(os.sep)
+    subdirectory, filename = os.path.split(original_filepath)
+    
+    # Get the directory name from the directory path
+    subdirectory = os.path.basename(subdirectory)
 
     # file_directory_with_background = directory_for_background + '/' + subdirectory
     # file_directory_without_background = directory_for_no_background + '/' + subdirectory
@@ -174,21 +177,13 @@ def denormalize(normalized_tensor_0_1):
 
 
 def image_to_tensors(image):
-
     to_tensor = transforms.Compose([transforms.ToTensor()])
-
     tensor_0_1 = to_tensor(image)
-
-    # tensor_0_1 = transforms.Compose([transforms.ToTensor()])(image)
-
     tensor_0_255 = (tensor_0_1*255).to(torch.uint8)
-
     normalize_as_ImageNet = transforms.Compose([
         transforms.Normalize(mean = [0.485, 0.456, 0.406], std = [0.229, 0.224, 0.225])])
-    
-    # pour e
-    normalized_tensor = normalize_as_ImageNet(tensor_0_1)
 
+    normalized_tensor = normalize_as_ImageNet(tensor_0_1)
     return tensor_0_255, normalized_tensor
 
 
@@ -323,29 +318,21 @@ def show_images_as_grid(list_of_imgs, image_per_line = 3):
 
 if __name__ == '__main__':
 
-    root_directory = 'dataset_chat'
+    root_directory = "selected_datasets/selected_dataset_chat"
 
     subdirectories = [d for d in os.listdir(root_directory) if os.path.isdir(os.path.join(root_directory, d))]
-    subdirectories = subdirectories[50:]  # on skip ceux qui sont déjà fait
-
-    # print(subdirectories[0])
-
-    # subdirectories = ['0036']
 
     for subdirectory in subdirectories:
         subdirectory_path = os.path.join(root_directory, subdirectory)
             
         jpg_files = glob.glob(os.path.join(subdirectory_path, "*.jpg"))
 
-        # jpg_files = jpg_files[-2:]  # si on veut sélectionner un range
-        # jpg_files = [jpg_files[3]]  # si on veut sélectionner un range
-
         print(str(len(jpg_files)) + ' files in the subdirectory ' + subdirectory)
-
         for jpg_file in jpg_files:
             preprocess_original_image(jpg_file, 
-                directory_for_background = 'dataset_chat_downscale', 
-                directory_for_no_background = 'dataset_chat_downscale_no_background')
+                directory_for_background = "selected_datasets/prep_bounding_box/", 
+                directory_for_no_background =  "selected_datasets/prep_no_back/")
 
         print('Done!')
-        print(' ')
+
+
