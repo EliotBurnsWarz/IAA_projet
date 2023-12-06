@@ -13,8 +13,14 @@
 
 back/
 dataset_chat/
+selected_dataset_chat/
 data/
 test/
+
+
+dataset_chat_downscale_no_background/
+dataset_chat_downscale_no_background/*
+
 helloworld.py
 __pycache__/
-selected_dataset_chat/
+
