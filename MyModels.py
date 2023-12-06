@@ -41,7 +41,10 @@ class CatNet(nn.Module):
     def forward(self, x):
         x = self.model.forward(x)
         return x
-
+    
+    def features(self, x):
+        x = self.model.features(x)
+        return x
 
 
 if __name__ == '__main__':
