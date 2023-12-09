@@ -10,7 +10,8 @@ def get_picture_tensors(root_directory,
                         required_test_imgs, 
                         use_validation = True,
                         use_selected_eval_datasets = False,
-                        show_progress = True):
+                        show_progress = True,
+                        ordered_dataset = False):
     
     subdirectories = [d for d in os.listdir(root_directory) if os.path.isdir(os.path.join(root_directory, d))]
 
@@ -94,6 +95,12 @@ def get_picture_tensors(root_directory,
     if show_progress:
         print('Done!')
     
+    if ordered_dataset:
+        print(len(train_images))
+        train_images = [train_images[i:i+required_train_imgs] for i in range(0, len(train_images), required_train_imgs)]
+        print(len(train_images))
+
+        
 
     return train_images, val_images, test_images, train_labels, val_labels, test_labels, n_classes_to_use
 
