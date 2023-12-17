@@ -14,15 +14,15 @@
 __pycache__/
 back/
 CatNet/__pycache__/
-dataset_augmented/
-dataset_chat/
-dataset_chat_downscale/
-dataset_chat_downscale_no_background/
-dataset_chat_eliot/
-dataset_chat_eliot_downscale/
-dataset_chat_eliot_downscale_no_background/
-dataset_preprocessing_errors/
-data/
+# dataset_augmented/
+# dataset_chat/
+# dataset_chat_downscale/
+# dataset_chat_downscale_no_background/
+# dataset_chat_eliot/
+# dataset_chat_eliot_downscale/
+# dataset_chat_eliot_downscale_no_background/
+# dataset_preprocessing_errors/
+# data/
 figures/data/
 misc/
 ourOwnDataset/
