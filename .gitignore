@@ -13,6 +13,7 @@
 
 __pycache__/
 back/
+CatNet/__pycache__/
 dataset_augmented/
 dataset_chat/
 dataset_chat_downscale/
@@ -22,6 +23,8 @@ dataset_chat_eliot_downscale/
 dataset_chat_eliot_downscale_no_background/
 dataset_preprocessing_errors/
 data/
+figures/data/
+misc/
 ourOwnDataset/
 test/
 dataset_chat_downscale.zip
