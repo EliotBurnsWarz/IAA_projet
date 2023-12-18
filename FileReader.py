@@ -59,10 +59,7 @@ def get_picture_tensors(root_directory,
 
                     if (use_validation):
                         add_image_to_lists([val_path], val_images, val_labels, label)
-                        
                     
-
-
                 else:
                     print(f"The file {subdirectory_path} does not have validation or test .")
                     
